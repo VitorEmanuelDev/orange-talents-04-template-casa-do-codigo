@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.*;
 
+import org.springframework.util.Assert;
+
 
 @Entity
 @Table(name = "CadastrosDB", uniqueConstraints={@UniqueConstraint(columnNames={"EMAIL"})})
@@ -36,19 +38,14 @@ public class Autor {
 	
 
 	public Autor(@NotBlank(message = "O campo nome não pode ficar em branco") String nome, @NotBlank(message = "O campo e-mail não pode ficar em branco") @Email @Pattern(regexp = ".+@.+\\..+", message = "Informe um e-mail válido") String email, @NotBlank(message = "O campo descrição não pode ficar em branco") @Size(max = 400) String descricao) {
-		//Assert.hasLength(nome, "Não pode haver campo vazio.");
+	
+		Assert.hasLength(nome, "Nome é obrigatório.");
+		
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
-		//this.instante = instante;
-	}
 
-	/*@Override
-	public String toString() {
-		
-		return "Autor [nome = " + nome + ", email = " + email +	", descricao = " + descricao + "]";	
-	
-	}*/
+	}
 
 	@Override
 	public String toString() {
