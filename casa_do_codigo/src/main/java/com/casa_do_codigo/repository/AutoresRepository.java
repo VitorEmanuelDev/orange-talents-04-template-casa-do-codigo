@@ -6,4 +6,4 @@ import com.casa_do_codigo.model.Autor;
 
 
 @Repository
-public interface AutoresRepository extends JpaRepository<Autor, Long> { }
+public interface AutoresRepository extends JpaRepository<Autor, Long> {}

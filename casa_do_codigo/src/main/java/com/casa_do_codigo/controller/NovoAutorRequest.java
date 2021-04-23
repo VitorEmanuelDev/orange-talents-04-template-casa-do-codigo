@@ -27,19 +27,18 @@ public class NovoAutorRequest {
 	private Instant instante = Instant.now();
 
 	
-	public NovoAutorRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao, @NotBlank Instant instante) {
+	public NovoAutorRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
 		
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
-		this.instante = instante;
 		
 	}
 
 	public Autor toModel() {
 		
-		return new Autor(this.nome, this.email, this.descricao, this.instante);
+		return new Autor(this.nome, this.email, this.descricao);
 	}
 
 	
