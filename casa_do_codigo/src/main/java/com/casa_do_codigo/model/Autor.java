@@ -36,6 +36,11 @@ public class Autor {
 	@Column(name = "MOMENTO")
 	private Instant instante = Instant.now();
 	
+	@Deprecated
+	public Autor() {
+		
+	}
+	
 
 	public Autor(@NotBlank(message = "O campo nome não pode ficar em branco") String nome, @NotBlank(message = "O campo e-mail não pode ficar em branco") @Email @Pattern(regexp = ".+@.+\\..+", message = "Informe um e-mail válido") String email, @NotBlank(message = "O campo descrição não pode ficar em branco") @Size(max = 400) String descricao) {
 	
