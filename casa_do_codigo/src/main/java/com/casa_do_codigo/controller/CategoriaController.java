@@ -6,39 +6,40 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import com.casa_do_codigo.model.Autor;
-import com.casa_do_codigo.validator.proibeEmailDuplicadoAutorValidator;
+import com.casa_do_codigo.model.Categoria;
+import com.casa_do_codigo.validator.proibeCategoriaDuplicadoAutorValidator;
+
 
 
 @RestController
 @RequestMapping("/lista")
-public class AutoresController {
+public class CategoriaController {
 	
 	@PersistenceContext
 	private EntityManager manager;
 	@Autowired
-	private proibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
+	private proibeCategoriaDuplicadoAutorValidator proibeCategoriaDuplicadoAutorValidator;
 	
 	
 	@InitBinder
 	public void init(WebDataBinder binder) {
 		
-		binder.addValidators(proibeEmailDuplicadoAutorValidator);
+		binder.addValidators(proibeCategoriaDuplicadoAutorValidator);
 		
 	}
 		
-	@PostMapping(value = "/autores_post")
+	@PostMapping(value = "/categorias_post")
 	@Transactional
-	public String create(@RequestBody @Validated @NotBlank NovoAutorRequest request){
+	public String create(@RequestBody @Validated @NotBlank NovaCategoriaRequest request){
 	   		
-		Autor autor = request.toModel();
-		manager.persist(autor);
-		return autor.toString();
+		Categoria novaCategoria = new Categoria(request.getNome());
+		manager.persist(novaCategoria);
+		return novaCategoria.toString();
+	
 	
 	}
 		
