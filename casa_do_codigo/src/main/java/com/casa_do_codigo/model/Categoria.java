@@ -30,7 +30,7 @@ public class Categoria {
 	@Override
 	public String toString() {
 		
-		return "Categoria [ID = " + id + "Nome = " + nome + " ]";	
+		return "Categoria [ID = " + id + ", Nome = " + nome + " ]";	
 		
 	}
 

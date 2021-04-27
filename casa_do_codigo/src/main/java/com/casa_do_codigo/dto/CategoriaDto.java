@@ -11,7 +11,7 @@ public class CategoriaDto {
 
 	@NotBlank(message = "O campo nome não pode ficar em branco")
 	@Column(name = "NOME", unique = true)
-	@UniqueValue(domainClass = Categoria.class, fieldName = "nome")
+	@UniqueValue(domainClass = Categoria.class, fieldName = "NOME")
 	private @NotBlank String nome;
 	
 	public void setNome(String nome) {

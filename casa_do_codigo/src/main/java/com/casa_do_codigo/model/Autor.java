@@ -55,7 +55,7 @@ public class Autor {
 	@Override
 	public String toString() {
 		
-		return "Autor [nome = " + nome + ", email = " + email +	", descricao = " + descricao + "Momento = " + instante + "]";	
+		return "Autor [Nome = " + nome + ", E-mail = " + email +	", Descrição = " + descricao + "Momento = " + instante + " ]";	
 		
 	}
 

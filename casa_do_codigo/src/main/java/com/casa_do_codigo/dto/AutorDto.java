@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.casa_do_codigo.model.Autor;
+import com.casa_do_codigo.validator.UniqueValue;
 
 public class AutorDto {
 	
@@ -15,6 +16,7 @@ public class AutorDto {
 	@NotBlank(message = "O campo e-mail não pode ficar em branco")
 	@Email
 	@Pattern(regexp=".+@.+\\..+", message = "Informe um e-mail válido")
+	@UniqueValue(domainClass = Autor.class, fieldName = "EMAIL")
 	@Column(name = "EMAIL", unique = true)
 	private String email;
 	@NotBlank(message = "O campo descrição não pode ficar em branco")
