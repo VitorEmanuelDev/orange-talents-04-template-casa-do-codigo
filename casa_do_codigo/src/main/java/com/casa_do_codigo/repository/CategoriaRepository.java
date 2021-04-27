@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.casa_do_codigo.model.Categoria;
 
-
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
 	Optional<Categoria> findByNome(String nome);
+
 	
 }

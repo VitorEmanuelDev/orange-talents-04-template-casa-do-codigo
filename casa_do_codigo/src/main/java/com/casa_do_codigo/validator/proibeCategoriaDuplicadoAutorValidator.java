@@ -1,4 +1,4 @@
-package com.casa_do_codigo.validator;
+/*package com.casa_do_codigo.validator;
 
 
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.*;
 
-import com.casa_do_codigo.controller.NovaCategoriaRequest;
+import com.casa_do_codigo.dto.CategoriaDto;
 import com.casa_do_codigo.model.Categoria;
 import com.casa_do_codigo.repository.CategoriaRepository;
 
@@ -21,7 +21,7 @@ public class proibeCategoriaDuplicadoAutorValidator implements Validator{
 	@Override
 	public boolean supports(Class<?> classe) {
 		
-		return NovaCategoriaRequest.class.isAssignableFrom(classe);
+		return CategoriaDto.class.isAssignableFrom(classe);
 		
 	}
 	
@@ -34,7 +34,7 @@ public class proibeCategoriaDuplicadoAutorValidator implements Validator{
 			
 		}
 		
-		NovaCategoriaRequest request = (NovaCategoriaRequest) target;
+		CategoriaDto request = (CategoriaDto) target;
 		
 		Optional<Categoria> possivelAutor = categoriaRepository.findByNome(request.getNome());
 		
@@ -46,4 +46,4 @@ public class proibeCategoriaDuplicadoAutorValidator implements Validator{
 		
 	}
 
-}
+}*/

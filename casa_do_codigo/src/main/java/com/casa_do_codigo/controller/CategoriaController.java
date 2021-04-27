@@ -4,14 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
+//import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import com.casa_do_codigo.dto.CategoriaDto;
 import com.casa_do_codigo.model.Categoria;
-import com.casa_do_codigo.validator.proibeCategoriaDuplicadoAutorValidator;
+//import com.casa_do_codigo.validator.proibeCategoriaDuplicadoAutorValidator;
 
 
 
@@ -21,7 +22,7 @@ public class CategoriaController {
 	
 	@PersistenceContext
 	private EntityManager manager;
-	@Autowired
+	/*@Autowired
 	private proibeCategoriaDuplicadoAutorValidator proibeCategoriaDuplicadoAutorValidator;
 	
 	
@@ -30,11 +31,12 @@ public class CategoriaController {
 		
 		binder.addValidators(proibeCategoriaDuplicadoAutorValidator);
 		
-	}
+	}*/
+		
 		
 	@PostMapping(value = "/categorias_post")
 	@Transactional
-	public String create(@RequestBody @Validated @NotBlank NovaCategoriaRequest request){
+	public String create(@RequestBody @Validated @NotBlank CategoriaDto request){
 	   		
 		Categoria novaCategoria = new Categoria(request.getNome());
 		manager.persist(novaCategoria);

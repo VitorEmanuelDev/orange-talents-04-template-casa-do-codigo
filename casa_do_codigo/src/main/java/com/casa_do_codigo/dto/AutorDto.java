@@ -1,4 +1,4 @@
-package com.casa_do_codigo.controller;
+package com.casa_do_codigo.dto;
 
 import java.time.*;
 
@@ -7,10 +7,8 @@ import javax.validation.constraints.*;
 
 import com.casa_do_codigo.model.Autor;
 
-
-public class NovoAutorRequest {
+public class AutorDto {
 	
-
 	@NotBlank(message = "O campo nome não pode ficar em branco")
 	@Column(name = "NOME")
 	private String nome;
@@ -27,7 +25,7 @@ public class NovoAutorRequest {
 	private Instant instante = Instant.now();
 
 	
-	public NovoAutorRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+	public AutorDto(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
 		
 		super();
 		this.nome = nome;
@@ -36,14 +34,28 @@ public class NovoAutorRequest {
 		
 	}
 
-	public Autor toModel() {
-		
-		return new Autor(this.nome, this.email, this.descricao);
+/*
+	public String getNome() {
+		return this.nome;
 	}
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public Instant getInstante() {
+		return this.instante;
+	}*/
 
 	public String getEmail() {
 		
 		return this.email;
+	}
+
+
+	public Autor toModel() {
+		
+		return new Autor(this.nome, this.email, this.descricao);
 	}
 
 	
