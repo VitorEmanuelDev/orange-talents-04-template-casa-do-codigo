@@ -1,27 +1,23 @@
 package com.casa_do_codigo.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "CategoriasDB", uniqueConstraints={@UniqueConstraint(columnNames={"NOME"})})
+@Table(name = "CategoriasDB", uniqueConstraints={@UniqueConstraint(columnNames={"nome"})})
 public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message = "O campo nome não pode ficar em branco")
-	@Column(name = "NOME", unique = true)
+	@NotBlank
+	@Size(min = 3)
 	private String nome;
 	
-	public Categoria(@NotBlank(message = "O campo nome não pode ficar em branco") String nome) {
+	public Categoria(@NotBlank String nome) {
 	
 		this.nome = nome;
 		

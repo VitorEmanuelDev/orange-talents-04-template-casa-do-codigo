@@ -7,27 +7,28 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.*;
 
-import com.casa_do_codigo.dto.AutorDTO;
-import com.casa_do_codigo.model.Autor;
+import com.casa_do_codigo.dto.CategoriaDTO;
+import com.casa_do_codigo.model.Categoria;
 
 
 @RestController
 @RequestMapping("/lista")
-public class AutoresController {
+public class CategoriasController {
 	
 	@PersistenceContext
 	private EntityManager manager;
-
 		
-	@PostMapping(value = "/autores")
+	@PostMapping(value = "/categorias")
 	@Transactional
-	public String create(@RequestBody @Valid @NotBlank AutorDTO request){
+	public String create(@RequestBody @Valid @NotBlank CategoriaDTO request){
 	   		
-		Autor autor = request.toModel();
-		manager.persist(autor);
-		return autor.toString();
+		Categoria novaCategoria = new Categoria(request.getNome());
+		manager.persist(novaCategoria);
+		return novaCategoria.toString();
+	
 	
 	}
 		

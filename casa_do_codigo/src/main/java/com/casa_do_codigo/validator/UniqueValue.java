@@ -4,6 +4,8 @@ import java.lang.annotation.*;
 
 import javax.validation.*;
 
+import com.casa_do_codigo.model.Livro;
+
 
 @Documented
 @Constraint(validatedBy = { UniqueValueValidator.class })
@@ -17,8 +19,8 @@ public @interface UniqueValue {
 		
 	Class<? extends Payload>[] payload() default {};
 
-	Class<?> domainClass();
-
 	String fieldName();
+
+	Class<?> targetClass();
 
 }

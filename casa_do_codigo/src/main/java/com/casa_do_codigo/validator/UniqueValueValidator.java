@@ -19,7 +19,7 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
 	public void initialize(UniqueValue constraintAnnotation) {
 		
 		domain = constraintAnnotation.fieldName();
-		objeto = constraintAnnotation.domainClass();
+		objeto = constraintAnnotation.targetClass();
 		
 		}
 	
