@@ -4,8 +4,6 @@ import java.lang.annotation.*;
 
 import javax.validation.*;
 
-import com.casa_do_codigo.model.Livro;
-
 
 @Documented
 @Constraint(validatedBy = { UniqueValueValidator.class })

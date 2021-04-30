@@ -1,4 +1,4 @@
-package com.casa_do_codigo.validator;
+/*package com.casa_do_codigo.validator;
 
 
 import java.lang.annotation.Documented;
@@ -9,8 +9,6 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
-import com.casa_do_codigo.model.Autor;
 
 @Documented
 @Constraint(validatedBy = { ExistsIdValidator.class })
@@ -28,4 +26,4 @@ public @interface ExistsId {
 
 	Class<?> targetClass();
 
-}
+}*/

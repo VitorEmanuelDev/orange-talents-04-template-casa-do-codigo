@@ -4,9 +4,10 @@ package com.casa_do_codigo.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 //import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
-import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 import org.springframework.util.Assert;
@@ -14,13 +15,11 @@ import org.springframework.util.Assert;
 import com.casa_do_codigo.model.Autor;
 import com.casa_do_codigo.model.Categoria;
 import com.casa_do_codigo.model.Livro;
-import com.casa_do_codigo.validator.ExistsId;
+//import com.casa_do_codigo.validator.ExistsId;
 import com.casa_do_codigo.validator.UniqueValue;
 //import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonProperty;
 //import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 //import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 //import com.fasterxml.jackson.databind.util.Converter;
@@ -29,39 +28,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class LivrosDTO {
 
 	@NotBlank
-	@UniqueValue(targetClass = Livro.class, fieldName = "titulo")
+	@UniqueValue(targetClass = Livro.class,fieldName = "titulo")
 	private String titulo;
 	@NotBlank
 	@Size(max = 500)
-	private  String resumo;
+	private String resumo;
 	@NotBlank
 	private String sumario;
-	@NotBlank
+	@NotNull
 	@Min(20)
 	private BigDecimal preco;
-	@NotBlank
 	@Min(100)
-	private Integer paginas;
+	private int paginas;
 	@NotBlank
-	@UniqueValue(targetClass = Livro.class, fieldName = "isbn")
+	@UniqueValue(targetClass = Livro.class,fieldName = "isbn")
 	private String isbn;
 	@Future
+	@NotNull
 	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
-	//@JsonDeserialize(as = Livro.class)
-	private @Future LocalDate publicacao;
+	private LocalDate publicacao;
 	@NotNull
-	@ExistsId(targetClass = Autor.class, fieldName = "id")
-	//@ManyToOne
-	private Autor nomeAutor;
+	//@ExistsId(targetClass = Autor.class, fieldName = "id")
+	@Valid
+	private Long idAutor;
 	@NotNull
-	@ExistsId(targetClass = Categoria.class, fieldName = "id")
-	//@ManyToOne
-	private Categoria nomeCategoria;
-
-	@JsonCreator
-	public LivrosDTO(@NotBlank @JsonProperty("titulo")String titulo, @NotBlank @Size(max = 500) @JsonProperty("resumo") String resumo, @NotBlank @JsonProperty("sumario") String sumario,
-			@NotNull @Min(20) @JsonProperty("preco") BigDecimal preco, @Min(100) @NotNull @JsonProperty("paginas") Integer paginas, @NotBlank  @JsonProperty("isbn") String isbn,
-			@Future	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING) @JsonProperty("publicacao") LocalDate publicacao, @NotNull @JsonProperty("nomeAutor") @NotNull Autor nomeAutor, @NotNull @JsonProperty("nomeCategoria") @NotNull Categoria nomeCategoria) {
+	//@ExistsId(targetClass = Categoria.class, fieldName = "id")
+	@Valid
+	private Long idCategoria;
+	
+	public LivrosDTO(@NotBlank String titulo,
+			@NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
+			@NotNull @Min(20) BigDecimal preco, @Min(100) int paginas,
+			@NotBlank String isbn, @NotNull @Valid Long idAutor, @NotNull @Valid Long idCategoria) {
 		
 		super();
 		this.titulo = titulo;
@@ -70,53 +68,31 @@ public class LivrosDTO {
 		this.preco = preco;
 		this.paginas = paginas;
 		this.isbn = isbn;
-		this.publicacao = publicacao;
-		this.nomeAutor = nomeAutor;
-		this.nomeCategoria = nomeCategoria;
+		this.idAutor = idAutor;
+		this.idCategoria = idCategoria;
 	}
 
 
-	public LivrosDTO(Livro livro) {
-	
-	}
-
-
+		
 	public void setPublicacao(LocalDate publicacao) {
 		this.publicacao = publicacao;
 	}
 	
-	
-	public void setNomeAutor(Autor nomeAutor) {
-		this.nomeAutor = nomeAutor;
-	}
-
-	public void setNomeCategoria(Categoria nomeCategoria) {
-		this.nomeCategoria = nomeCategoria;
-	}
-
 
 	public Livro toModel(EntityManager manager) {
 		
-		@NotNull Autor autor = manager.find(Autor.class, nomeAutor);
-		@NotNull Categoria categoria = manager.find(Categoria.class, nomeCategoria);
+		@NotNull Autor autor = manager.find(Autor.class, idAutor);
+		@NotNull Categoria categoria = manager.find(Categoria.class, idCategoria);
 		
-		Assert.state(autor != null, "Autor não pode ser nulo.");
-		Assert.state(categoria != null, "Categoria não pode ser nulo.");
+		Assert.state(Objects.nonNull(autor), "Autor não pode ser nulo.");
+		Assert.state(Objects.nonNull(categoria), "Categoria não pode ser nulo.");
 		
 		
 		
-		return new Livro(titulo, resumo, sumario, preco, paginas, isbn, publicacao, nomeAutor, nomeCategoria);
+		return new Livro(titulo, resumo, sumario, preco, paginas, isbn,
+				publicacao, autor, categoria); 
+		
 	}
 	
-
-	/*@Override
-	public String toString() {
-		
-		return "Categoria [ID = " + id + ", Titulo = " + titulo + ", Resumo = "
-		        + resumo + ", Sumário = " + sumario + ", Preco = " + preco + 
-		        ", Paginas = " + paginas + ", ISBN = " + isbn + ", Publicacao = " + publicacao +
-		        ", Autor = " + nomeAutor + ", Categoria = " + nomeCategoria + " ]";	
-		
-	}*/
 
 }
