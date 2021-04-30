@@ -1,4 +1,4 @@
-package com.casa_do_codigo.model;
+package com.casa_do_codigo.autor;
 
 import java.time.Instant;
 
@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "AutoresDB", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
-public class Autor {
+public class AutorModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +28,12 @@ public class Autor {
 	private Instant instante = Instant.now();
 	
 	@Deprecated
-	public Autor() {
+	public AutorModel() {
 		
 	}
 	
 
-	public Autor(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+	public AutorModel(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
 	
 		Assert.hasLength(nome, "Nome é obrigatório.");
 		
@@ -43,11 +43,32 @@ public class Autor {
 
 	}
 
-	@Override
-	public String toString() {
+	
+	public Long getId() {
 		
-		return "Autor [Nome = " + nome + ", E-mail = " + email +	", Descrição = " + descricao + "Momento = " + instante + " ]";	
-		
+		return id;
 	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public Instant getInstante() {
+		return instante;
+	}
+	
+	
 
 }

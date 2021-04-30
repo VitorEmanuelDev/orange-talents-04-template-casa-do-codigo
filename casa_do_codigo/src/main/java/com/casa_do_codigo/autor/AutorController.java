@@ -1,34 +1,31 @@
-package com.casa_do_codigo.controller;
+package com.casa_do_codigo.autor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.validation.annotation.Validated;
-
 import org.springframework.web.bind.annotation.*;
-
-import com.casa_do_codigo.dto.CategoriaDTO;
-import com.casa_do_codigo.model.Categoria;
 
 
 @RestController
 @RequestMapping("/lista")
-public class CategoriasController {
+public class AutorController {
 	
 	@PersistenceContext
 	private EntityManager manager;
+
 		
-	@PostMapping(value = "/categorias")
+	@PostMapping(value = "/autores")
 	@Transactional
-	public String create(@RequestBody @Valid @NotBlank CategoriaDTO request){
+	 public ResponseEntity<NovoAutorResponse> create(@RequestBody @Valid NovoAutorRequest request){
 	   		
-		Categoria novaCategoria = new Categoria(request.getNome());
-		manager.persist(novaCategoria);
-		return novaCategoria.toString();
-	
+		AutorModel autor = request.toModel();
+		manager.persist(autor);
+		return ResponseEntity.ok(new NovoAutorResponse(autor));
 	
 	}
 		

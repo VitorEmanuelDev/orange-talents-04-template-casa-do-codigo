@@ -1,4 +1,4 @@
-package com.casa_do_codigo.model;
+package com.casa_do_codigo.categoria;
 
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "CategoriasDB", uniqueConstraints={@UniqueConstraint(columnNames={"nome"})})
-public class Categoria {
+public class CategoriaModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,22 +18,25 @@ public class Categoria {
 	private String nome;
 	
 	@Deprecated
-	public Categoria() {
+	public CategoriaModel() {
 		
 	}
 	
-	public Categoria(@NotBlank String nome) {
+	public CategoriaModel(@NotBlank String nome) {
 	
 		this.nome = nome;
 		
 	}
 
-	@Override
-	public String toString() {
-		
-		return "Categoria [ID = " + id + ", Nome = " + nome + " ]";	
-		
+
+	public Long getId() {
+		return id;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+	
 
 }
 

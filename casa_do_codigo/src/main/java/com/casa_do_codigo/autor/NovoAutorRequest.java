@@ -1,20 +1,19 @@
-package com.casa_do_codigo.dto;
+package com.casa_do_codigo.autor;
 
 import java.time.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.casa_do_codigo.model.Autor;
 import com.casa_do_codigo.validator.UniqueValue;
 
-public class AutorDTO {
+public class NovoAutorRequest {
 	
 	@NotBlank
 	private String nome;
 	@NotBlank
 	@Email
-	@UniqueValue(targetClass = Autor.class, fieldName = "email")
+	@UniqueValue(targetClass = AutorModel.class, fieldName = "email")
 	private String email;
 	@NotBlank
 	@Size(max=400)
@@ -23,9 +22,8 @@ public class AutorDTO {
 	private Instant instante = Instant.now();
 
 	
-	public AutorDTO(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+	public NovoAutorRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
 		
-		super();
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
@@ -33,15 +31,9 @@ public class AutorDTO {
 	}
 
 
-	public String getEmail() {
+	public AutorModel toModel() {
 		
-		return this.email;
-	}
-
-
-	public Autor toModel() {
-		
-		return new Autor(nome, email, descricao);
+		return new AutorModel(nome, email, descricao);
 	}
 
 	
