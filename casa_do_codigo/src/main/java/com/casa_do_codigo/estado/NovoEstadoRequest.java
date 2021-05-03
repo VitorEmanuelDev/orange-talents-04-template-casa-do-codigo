@@ -12,7 +12,7 @@ public class NovoEstadoRequest {
 	@NotBlank
 	@UniqueValue(targetClass = EstadoModel.class, fieldName = "nome")
 	private String nome;
-	//@NotNull @ExistsId(targetClass = PaisModel.class, fieldName = "id")
+	@NotNull @ExistsId(targetClass = PaisModel.class, fieldName = "id")
 	private Long idPais;
 	
 	@Deprecated

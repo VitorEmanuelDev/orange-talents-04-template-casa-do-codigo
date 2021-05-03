@@ -40,7 +40,7 @@ public class DetalheLivroResponse {
 	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
 	private LocalDate publicacao;
 	@NotNull
-	//@ExistsId(targetClass = AutorModel.class, fieldName = "id")
+	//@ExistsId(targetClass = ClienteModel.class, fieldName = "id")
 	@Valid
 	private AutorModel autor;
 	@NotNull
