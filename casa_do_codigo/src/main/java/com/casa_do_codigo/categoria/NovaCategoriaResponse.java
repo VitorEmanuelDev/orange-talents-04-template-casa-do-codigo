@@ -1,6 +1,6 @@
 package com.casa_do_codigo.categoria;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 import com.casa_do_codigo.validator.UniqueValue;
 

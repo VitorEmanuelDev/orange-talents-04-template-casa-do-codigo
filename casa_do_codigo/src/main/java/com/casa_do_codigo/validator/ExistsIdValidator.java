@@ -9,6 +9,8 @@ import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.util.Assert;
+
 public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object>{
 
 	private String domain;
@@ -28,7 +30,8 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object>{
 		Query query = manager.createQuery("select 1 from " + objeto.getName() + " where " + domain + "=:value");
 		query.setParameter("value", value);
 		List<?> list = query.getResultList();
-		return list.isEmpty();
+		Assert.isTrue(list.size() <=1, "Há mais de um" + objeto + "com o atributo" + domain + "contendo o valor =" + value );
+		return !list.isEmpty();
 		
 		
 

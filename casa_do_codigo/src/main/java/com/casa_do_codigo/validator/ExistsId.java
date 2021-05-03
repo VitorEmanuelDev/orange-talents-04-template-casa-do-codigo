@@ -12,7 +12,7 @@ public @interface ExistsId {
     Class<?> targetClass();
 
     String fieldName();
-    String message() default "Já existe valor para o campo {0}";
+    String message() default "Campo {0} já preenchido";
     
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

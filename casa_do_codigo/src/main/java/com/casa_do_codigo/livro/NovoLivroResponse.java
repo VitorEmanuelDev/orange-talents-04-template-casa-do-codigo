@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 
 import com.casa_do_codigo.autor.AutorModel;
 import com.casa_do_codigo.categoria.CategoriaModel;
-//import com.casa_do_codigo.validator.ExistsId;
+import com.casa_do_codigo.validator.ExistsId;
 import com.casa_do_codigo.validator.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -40,11 +40,11 @@ public class NovoLivroResponse {
 	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
 	private LocalDate publicacao;
 	@NotNull
-	//@ExistsId(targetClass = AutorModel.class, fieldName = "id")
+	@ExistsId(targetClass = AutorModel.class, fieldName = "id")
 	@Valid
 	private AutorModel autor;
 	@NotNull
-	//@ExistsId(targetClass = CategoriaModel.class, fieldName = "id")
+	@ExistsId(targetClass = CategoriaModel.class, fieldName = "id")
 	@Valid
 	private CategoriaModel categoria;
 	

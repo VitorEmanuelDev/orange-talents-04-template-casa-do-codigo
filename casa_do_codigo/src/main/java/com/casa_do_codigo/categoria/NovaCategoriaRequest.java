@@ -16,6 +16,7 @@ public class NovaCategoriaRequest {
 	 }
 	 
 	 public NovaCategoriaRequest(@NotBlank String nome) {
+		 
 		 this.nome = nome;
 		 
 	 }
