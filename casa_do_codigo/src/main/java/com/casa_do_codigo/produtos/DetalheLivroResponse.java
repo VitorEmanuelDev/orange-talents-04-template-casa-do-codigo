@@ -1,4 +1,4 @@
-package com.casa_do_codigo.livro;
+package com.casa_do_codigo.produtos;
 
 
 import java.math.BigDecimal;
@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 
 import com.casa_do_codigo.autor.AutorModel;
 import com.casa_do_codigo.categoria.CategoriaModel;
+import com.casa_do_codigo.livro.LivroModel;
 //import com.casa_do_codigo.validator.ExistsId;
 import com.casa_do_codigo.validator.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 public class DetalheLivroResponse {
 
-	private Long id;
 	@NotBlank
 	@UniqueValue(targetClass = LivroModel.class,fieldName = "titulo")
 	private String titulo;
@@ -50,7 +50,6 @@ public class DetalheLivroResponse {
 	
 	public DetalheLivroResponse(LivroModel livro) {
 		
-		this.id = livro.getId();
 		this.titulo = livro.getTitulo();
 		this.resumo = livro.getResumo();
 		this.sumario = livro.getSumario();
@@ -63,10 +62,6 @@ public class DetalheLivroResponse {
 		
 	}
 
-
-	public Long getId() {
-		return id;
-	}	
 	
 	public String getTitulo() {
 		return titulo;

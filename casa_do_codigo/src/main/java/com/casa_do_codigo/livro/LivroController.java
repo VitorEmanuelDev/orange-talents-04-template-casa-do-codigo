@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.casa_do_codigo.produtos.DetalheLivroResponse;
+
 
 
 @RestController
@@ -39,18 +41,4 @@ public class LivroController {
 	}
 	
 	
-	@GetMapping(value = "/livros/{id}")
-	public DetalheLivroResponse getById(@PathVariable Long id){ 
-		
-		LivroModel livro = manager.find(LivroModel.class, id);
-		
-		if(livro == null){
-			
-	           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-	           
-	        }
-		
-	        return new DetalheLivroResponse(livro);
-	}
-
 }

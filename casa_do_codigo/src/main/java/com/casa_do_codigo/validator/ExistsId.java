@@ -1,29 +1,20 @@
-/*package com.casa_do_codigo.validator;
+package com.casa_do_codigo.validator;
+
+import javax.validation.*;
+import java.lang.annotation.*;
 
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.validation.Constraint;
-import javax.validation.Payload;
-
-@Documented
-@Constraint(validatedBy = { ExistsIdValidator.class })
-@Target({ ElementType.FIELD })
+@Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = {ExistsIdValidator.class})
 public @interface ExistsId {
-
-	String message() default "{com.casa_do_codigo.validator.ExistsId}";
 	
-	Class<?>[] groups() default {};
-	
-	Class<? extends Payload>[] payload() default {};
-	
-	String fieldName();
+    Class<?> targetClass();
 
-	Class<?> targetClass();
-
-}*/
+    String fieldName();
+    String message() default "Já existe valor para o campo {0}";
+    
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+    
+}
